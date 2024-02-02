@@ -1,4 +1,4 @@
-
+package id.ac.ui.cs.advprog.eshop.service;
 
 import id.ac.ui.cs.advprog.eshop.model.Product;
 import id.ac.ui.cs.advprog.eshop.repository.ProductRepository;
@@ -24,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findAll() {
         Iterator<Product> productIterator = productRepository.findAll();
         List<Product> allProduct = new ArrayList<>();
-        productIterator.forEachRemaining(all Product::add);
+        productIterator.forEachRemaining(allProduct::add);
         return allProduct;
     }
 }
