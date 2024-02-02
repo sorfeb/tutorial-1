@@ -34,4 +34,11 @@ public class ProductController {
         model.addAttribute("products", allProducts);
         return "productList";
     }
+
+//    @GetMapping("/delete/{id}")
+//    public String deleteProduct(Model model) {
+//        Product product =
+//        model.addAttribute("products", allProducts);
+//        return "productList";
+//    }
 }
