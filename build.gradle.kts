@@ -60,6 +60,6 @@ tasks.register<Test>("functionalTest"){
 	}
 }
 
-tasks.withType<Test> {
+tasks.withType<Test>().configureEach() {
 	useJUnitPlatform()
 }

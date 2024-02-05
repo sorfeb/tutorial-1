@@ -30,14 +30,14 @@
             <td th:text="${product.productName}"></td>
 
             <td>
-                <button type="button" class="btn btn-sm btn-success" onclick="incrementQuantity(this)">
-                    +
+                <button type="button" class="btn btn-sm btn-primary" onclick="decrementQuantity(this)">
+                    -
                 </button>
 
                 <span th:text="${product.productQuantity}" class="mx-2"></span>
 
-                <button type="button" class="btn btn-sm btn-primary" onclick="decrementQuantity(this)">
-                    -
+                <button type="button" class="btn btn-sm btn-success" onclick="incrementQuantity(this)">
+                    +
                 </button>
             </td>
 
@@ -52,7 +52,23 @@
 </div>
 
 <script>
-    function deleteRow(button) {
+    function incrementQuantity(button) {
+        var quantitySpan = button.parentElement.querySelector('.mx-2');
+        var currentQuantity = parseInt(quantitySpan.innerText);
+        quantitySpan.innerText = currentQuantity + 1;
+    }
+
+    function decrementQuantity(button) {
+        var quantitySpan = button.parentElement.querySelector('.mx-2');
+        var currentQuantity = parseInt(quantitySpan.innerText);
+
+        // Ensure quantity doesn't go below 0
+        if (currentQuantity > 0) {
+            quantitySpan.innerText = currentQuantity - 1;
+        }
+    }
+
+    function deleteProduct(button) {
         var row = button.closest('tr');
         row.remove();
     }
