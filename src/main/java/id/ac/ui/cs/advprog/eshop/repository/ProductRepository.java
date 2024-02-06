@@ -34,14 +34,12 @@ public class ProductRepository {
     }
 
     public Product delete(String productId) {
-        Product deletedProduct = null;
         for (Product product : productData) {
             if (product.getProductId().equals(productId)) {
-                deletedProduct = product;
                 productData.remove(product);
-                break;
+                return product;
             }
         }
-        return deletedProduct;
+        return null;
     }
 }

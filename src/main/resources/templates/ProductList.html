@@ -45,8 +45,11 @@
             </td>
 
             <td class = "delete-button">
-                <button th:action="@{/product/delete/{productId}(productId=${product.productId})}" type="button" class="btn btn-danger btn-sm" onclick="deleteProduct(this)">
-                    Delete
+                <button type="button" class="btn btn-danger btn-sm" onclick="deleteProduct(this)">
+                    <a th:href="@{/product/delete/{productId}(productId=${product.productId})}"
+                       style="color: inherit; text-decoration: none; cursor: pointer;">
+                        Delete
+                    </a>
                 </button>
             </td>
         </tr>
