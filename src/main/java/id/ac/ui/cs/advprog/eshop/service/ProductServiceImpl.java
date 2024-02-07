@@ -28,8 +28,12 @@ public class ProductServiceImpl implements ProductService {
         return allProduct;
     }
 
-    public void updateProductQuantity(String productId, int newQuantity){
-        productRepository.updateProductQuantity(productId, newQuantity);
+    public Product findById(String productId){
+        return productRepository.findById(productId);
+    }
+
+    public Product editProduct(Product product){
+        return productRepository.editProduct(product);
     }
 
     public Product deleteProduct(String productId){

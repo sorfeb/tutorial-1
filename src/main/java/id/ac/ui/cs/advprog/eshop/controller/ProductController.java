@@ -35,15 +35,22 @@ public class ProductController {
         return "productList";
     }
 
-    @PostMapping("/edit/{productId}")
-    public String updateProduct(@RequestBody Product updatedProduct) {
-        service.updateProductQuantity(updatedProduct.getProductId(), updatedProduct.getProductQuantity());
+    @GetMapping("/edit/{productId}")
+    public String editProductPage(@PathVariable() String productId, Model model) {
+        Product targetProduct = service.findById(productId);
+        model.addAttribute("product", targetProduct);
+        return "EditProduct";
+    }
 
-        return "productList";
+    @PostMapping("/edit")
+    public String editProductPost(@ModelAttribute Product product, Model model) {
+        System.out.println("Controller ID: " + product.getProductId());
+        service.editProduct(product);
+        return "redirect:list";
     }
 
     @GetMapping("/delete/{productId}")
-    public String deleteProduct(@PathVariable("productId") String productId) {
+    public String deleteProduct(@PathVariable() String productId) {
         service.deleteProduct(productId);
         return "redirect:/product/list";
     }
