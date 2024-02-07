@@ -14,9 +14,15 @@ public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
 
     public Product create(Product product) {
-        String UniqueId = UUID.randomUUID().toString();
-        product.setProductId(UniqueId);
-
+        if (product.getProductId() == null) {
+            product.setProductId(
+                //Assign new UUID if the product ID is not yet set
+                UUID.randomUUID().toString()
+            );
+        }
+        if(product.getProductQuantity() < 0){
+            throw new IllegalArgumentException("Product quantity cannot be negative");
+        }
         productData.add(product);
         return product;
     }
@@ -35,12 +41,13 @@ public class ProductRepository {
     }
 
     public Product editProduct(Product product) {
-        System.out.println(product.getProductId());
-        System.out.println(product.getProductName());
-        System.out.println(product.getProductQuantity());
 
         Product targetProduct = findById(product.getProductId());
+
         targetProduct.setProductName(product.getProductName());
+
+        if(product.getProductQuantity() < 0){
+            throw new IllegalArgumentException("Product quantity cannot be negative");}
         targetProduct.setProductQuantity(product.getProductQuantity());
 
         return targetProduct;
@@ -53,6 +60,6 @@ public class ProductRepository {
                 return product;
             }
         }
-        return null;
+        throw new ArrayIndexOutOfBoundsException("Product not found");
     }
 }

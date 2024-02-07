@@ -13,7 +13,7 @@ import java.util.Iterator;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-class ProductReposistoryTest {
+class ProductRepositoryTest {
     @InjectMocks
     ProductRepository productRepository;
     @BeforeEach
@@ -62,5 +62,68 @@ class ProductReposistoryTest {
         savedProduct = productIterator.next();
         assertEquals(product2.getProductId(), savedProduct.getProductId());
         assertFalse(productIterator.hasNext());
+    }
+
+    @Test
+    void testEditProduct(){
+        //Create the product
+        Product productInitial = new Product();
+        productInitial.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        productInitial.setProductName("Sampo Cap Bambang");
+        productInitial.setProductQuantity(100);
+        productRepository.create(productInitial);
+
+        //Edit the product
+        Product productModified = new Product();
+        productModified.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        productModified.setProductName("Sampo Cap Blimbing");
+        productModified.setProductQuantity(101);
+        productRepository.editProduct(productModified);
+
+        //Assert
+        Product testProduct = productRepository.findById("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        assertEquals("eb558e9f-1c39-460e-8860-71af6af63bd6", testProduct.getProductId());
+        assertEquals("Sampo Cap Blimbing", testProduct.getProductName());
+        assertEquals(101, testProduct.getProductQuantity());
+    }
+
+    @Test
+    void testEditProduct_IfProductQuantityIsNegative(){
+        //Create the product
+        Product productInitial = new Product();
+        productInitial.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        productInitial.setProductName("Sampo Cap Bambang");
+        productInitial.setProductQuantity(100);
+        productRepository.create(productInitial);
+
+        //Edit the product
+        Product productModified = new Product();
+        productModified.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        productModified.setProductName("Sampo Cap Blimbing");
+        productModified.setProductQuantity(-100);
+        assertThrows(IllegalArgumentException.class, () -> productRepository.editProduct(productModified));
+    }
+
+    @Test
+    void testDeleteProduct(){
+        //Create the product
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        //Delete the product
+        productRepository.delete("eb558e9f-1c39-460e-8860-71af6af63bd6");
+
+        //Assert
+        Product testProduct = productRepository.findById("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        assertNull(testProduct);
+    }
+
+    @Test
+    void testDeleteProduct_IfProductNotFound(){
+        assertThrows(ArrayIndexOutOfBoundsException.class,
+                () -> productRepository.delete("randomProductId"));
     }
 }
