@@ -29,16 +29,16 @@
                 <tbody>
                 <tr th:each="product: ${products}">
 
-                    <td th:text="${product.productId}"></td>
+                    <td th:text="${product.productId}" id = "productId"></td>
 
-                    <td th:text="${product.productName}"></td>
+                    <td th:text="${product.productName}" id = "productName"></td>
 
                     <td>
                         <button type="button" class="btn btn-sm btn-primary" onclick="decrementQuantity(this)">
                             -
                         </button>
 
-                        <span th:text="${product.productQuantity}" class="mx-2"></span>
+                        <span th:text="${product.productQuantity}" class="mx-2" id = "productQuantity"></span>
 
                         <button type="button" class="btn btn-sm btn-success" onclick="incrementQuantity(this)">
                             +
