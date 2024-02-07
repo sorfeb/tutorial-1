@@ -35,7 +35,7 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-	testImplementation("org.selenium.selenium:selenium-java:$seleniumJavaVersion")
+	testImplementation("org.seleniumhq.selenium:selenium-java:$seleniumJavaVersion")
 	testImplementation("io.github.bonigarcia:selenium-jupiter:$seleniumJupiterVersion")
 	testImplementation("io.github.bonigarcia:webdrivermanager:$webdrivermanagerVersion")
 	testImplementation("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
@@ -60,6 +60,6 @@ tasks.register<Test>("functionalTest"){
 	}
 }
 
-tasks.withType<Test> {
+tasks.withType<Test>().configureEach() {
 	useJUnitPlatform()
 }
