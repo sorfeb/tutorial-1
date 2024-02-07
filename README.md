@@ -24,8 +24,19 @@ After implementing those principles and practices, I overcame the problems, bugs
 <hr>
 
 <h2>Reflection 2</h2>
+
 <ol>
-<li> After writing the unit test, how do you feel? How many unit tests should be made in a class? How to make sure that our unit tests are enough to verify our program? It would be good if you learned about code coverage. Code coverage is a metric that can help you understand how much of your source is tested. If you have 100% code coverage, does that mean your code has no bugs or errors? </li>
-<li> Suppose that after writing the CreateProductFunctionalTest.java along with the corresponding test case, you were asked to create another functional test suite that verifies the number of items in the product list. You decided to create a new Java class similar to the prior functional test suites with the same setup procedures and instance variables. 
-What do you think about the cleanliness of the code of the new functional test suite? Will the new code reduce the code quality? Identify the potential clean code issues, explain the reasons, and suggest possible improvements to make the code cleaner! Please write your reflection inside the repository's README.md file. </li>
+  <li>
+I felt more confident about my coding knowing that I had several tests for each function/feature that I made to make them more secure and functional. There is no real answer on how many unit tests should be made. The number of unit tests depends on the complexity of the function and also the number of scenarios that wanted to be tested. 
+
+Having 100% code coverage does not mean that your code is free of bugs or errors. It only means your tests have covered most of your code have been tested, but not the edge cases, logic and complexity, system-level issues, and etc.
+  </li>
+  <li>
+    Potential clean code issues:
+    <ul>
+      <li>Copying the setup procedures and instance variables mean that you need to rewrite the exact same code. That leads to a problem called Code Duplication.</li>
+      <li>Creating multiple tests with similar procedures and instance variables decreases the readability and maintainability that will lead errors.</li>
+    </ul>
+    It is suggested to write the setup procedure and instance variables into reusable methods or functions make it reusable for more scenarios. Setup and teardown procedures are better to be automated reduce inefficiency and increase maintainability.
+  </li>
 </ol>
