@@ -19,4 +19,4 @@ jobs:
           java-version: "21"
           cache: "gradle"
       - name: Run unit tests
-        run: ./gradlew test
+        run: .\gradlew test
