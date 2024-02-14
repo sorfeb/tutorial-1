@@ -79,6 +79,8 @@ class ProductRepositoryTest {
 
     @Test
     void testFindById_IfProductNotFound() {
+        productRepository.create(new Product());
+
         Product savedProduct = productRepository.findById("randomProductId");
         assertNull(savedProduct);
     }
@@ -156,6 +158,9 @@ class ProductRepositoryTest {
                 "eb558e9f-1c39-460e-8860-71af6af63bd6",
                 productRepository.delete("eb558e9f-1c39-460e-8860-71af6af63bd6").getProductId()
         );
+
+        //Create Random Product
+        productRepository.create(new Product());
 
         //Assert
         Product testProduct = productRepository.findById("eb558e9f-1c39-460e-8860-71af6af63bd6");
