@@ -78,6 +78,12 @@ class ProductRepositoryTest {
     }
 
     @Test
+    void testFindById_IfProductNotFound() {
+        Product savedProduct = productRepository.findById("randomProductId");
+        assertNull(savedProduct);
+    }
+
+    @Test
     void testEditProduct(){
         //Create the product
         Product productInitial = new Product();
