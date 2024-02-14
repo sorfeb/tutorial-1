@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Iterator;
 
@@ -65,6 +64,28 @@ class ProductRepositoryTest {
     }
 
     @Test
+    void testFindById() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Product savedProduct = productRepository.findById("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        assertEquals(product.getProductId(), savedProduct.getProductId());
+        assertEquals(product.getProductName(), savedProduct.getProductName());
+        assertEquals(product.getProductQuantity(), savedProduct.getProductQuantity());
+    }
+
+    @Test
+    void testFindById_IfProductNotFound() {
+        productRepository.create(new Product());
+
+        Product savedProduct = productRepository.findById("randomProductId");
+        assertNull(savedProduct);
+    }
+
+    @Test
     void testEditProduct(){
         //Create the product
         Product productInitial = new Product();
@@ -105,6 +126,25 @@ class ProductRepositoryTest {
     }
 
     @Test
+    void testCreateProduct_IfProductQuantityIsNegative(){
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(-100);
+        assertThrows(IllegalArgumentException.class, () -> productRepository.create(product));
+    }
+
+    @Test
+    void testCreateProduct_IfProductIdIsNull(){
+        Product product = new Product();
+        product.setProductId(null);
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+        assertFalse(product.getProductId() == null);
+    }
+
+    @Test
     void testDeleteProduct(){
         //Create the product
         Product product = new Product();
@@ -114,11 +154,19 @@ class ProductRepositoryTest {
         productRepository.create(product);
 
         //Delete the product
-        productRepository.delete("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        assertEquals(
+                "eb558e9f-1c39-460e-8860-71af6af63bd6",
+                productRepository.delete("eb558e9f-1c39-460e-8860-71af6af63bd6").getProductId()
+        );
+
+        //Create Random Product
+        productRepository.create(new Product());
 
         //Assert
         Product testProduct = productRepository.findById("eb558e9f-1c39-460e-8860-71af6af63bd6");
         assertNull(testProduct);
+        assertThrows(ArrayIndexOutOfBoundsException.class,
+                () -> productRepository.delete("eb558e9f-1c39-460e-8860-71af6af63bd6"));
     }
 
     @Test
