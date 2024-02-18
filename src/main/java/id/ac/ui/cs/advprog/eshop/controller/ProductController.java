@@ -84,7 +84,7 @@ class CarController extends ProductController {
 
     @GetMapping("/editCar/{carId}")
     public String editCarPage(@PathVariable() String carId, Model model) {
-        Car targetCar = carService.findById(carId);
+        Car car = carService.findById(carId);
         model.addAttribute("car", car);
         return "editCar";
     }
