@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public class ProductRepository {
+public class ProductRepository implements TemplateRepository<Product>{
 
     private List<Product> productData = new ArrayList<>();
 
@@ -40,7 +40,7 @@ public class ProductRepository {
         return null;
     }
 
-    public Product editProduct(Product product) {
+    public Product update(Product product) {
 
         Product targetProduct = findById(product.getProductId());
 
@@ -53,7 +53,7 @@ public class ProductRepository {
         return targetProduct;
     }
 
-    public Product delete(String productId) {
+    public Product deleteById(String productId) {
         for (Product product : productData) {
             if (product.getProductId().equals(productId)) {
                 productData.remove(product);
