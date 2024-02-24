@@ -15,21 +15,21 @@
         <thead>
         <tr>
             <th scope="col">Car Name</th>
-            <th scope="col">Quantity</th>
             <th scope="col">Color</th>
+            <th scope="col">Quantity</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="car: ${cars}">
-            <td th:text="${car.carName}"></td>
-            <td th:text="${car.carColor}"></td>
-            <td th:text="${car.carQuantity}"></td>
+            <td th:text="${car.productName}"></td>
+            <td th:text="${car.Color}"></td>
+            <td th:text="${car.productQuantity}"></td>
             <td>
-                <a th:href="@{/car/editCar/{id}(id=${car.carId})}" class="btn btn-info btn-sm">Edit</a>
+                <a th:href="@{/car/editCar/{id}(id=${car.productId})}" class="btn btn-info btn-sm">Edit</a>
             </td>
             <td>
                 <form th:action="@{/car/deleteCar}" method="post" >
-                    <input type="hidden" th:name="carId" th:value="${car.carId}" />
+                    <input type="hidden" th:name="carId" th:value="${car.productId}" />
                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
             </td>

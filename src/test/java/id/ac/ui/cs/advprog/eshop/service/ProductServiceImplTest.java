@@ -67,7 +67,7 @@ class ProductServiceImplTest {
         product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product.setProductName("Sampo Cap Bambang");
         product.setProductQuantity(100);
-        Mockito.when(productRepository.editProduct(product)).thenReturn(product);
+        Mockito.when(productRepository.update(product)).thenReturn(product);
 
         assertEquals(product, productService.editProduct(product));
     }
@@ -78,7 +78,7 @@ class ProductServiceImplTest {
         product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product.setProductName("Sampo Cap Bambang");
         product.setProductQuantity(100);
-        Mockito.when(productRepository.delete("eb558e9f-1c39-460e-8860-71af6af63bd6")).thenReturn(product);
+        Mockito.when(productRepository.deleteById("eb558e9f-1c39-460e-8860-71af6af63bd6")).thenReturn(product);
 
         assertEquals(product, productService.deleteProduct("eb558e9f-1c39-460e-8860-71af6af63bd6"));
     }

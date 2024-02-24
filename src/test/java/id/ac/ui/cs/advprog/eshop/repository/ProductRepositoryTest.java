@@ -99,7 +99,7 @@ class ProductRepositoryTest {
         productModified.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         productModified.setProductName("Sampo Cap Blimbing");
         productModified.setProductQuantity(101);
-        productRepository.editProduct(productModified);
+        productRepository.update(productModified);
 
         //Assert
         Product testProduct = productRepository.findById("eb558e9f-1c39-460e-8860-71af6af63bd6");
@@ -122,7 +122,7 @@ class ProductRepositoryTest {
         productModified.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         productModified.setProductName("Sampo Cap Blimbing");
         productModified.setProductQuantity(-100);
-        assertThrows(IllegalArgumentException.class, () -> productRepository.editProduct(productModified));
+        assertThrows(IllegalArgumentException.class, () -> productRepository.update(productModified));
     }
 
     @Test
@@ -156,7 +156,7 @@ class ProductRepositoryTest {
         //Delete the product
         assertEquals(
                 "eb558e9f-1c39-460e-8860-71af6af63bd6",
-                productRepository.delete("eb558e9f-1c39-460e-8860-71af6af63bd6").getProductId()
+                productRepository.deleteById("eb558e9f-1c39-460e-8860-71af6af63bd6").getProductId()
         );
 
         //Create Random Product
@@ -166,12 +166,12 @@ class ProductRepositoryTest {
         Product testProduct = productRepository.findById("eb558e9f-1c39-460e-8860-71af6af63bd6");
         assertNull(testProduct);
         assertThrows(ArrayIndexOutOfBoundsException.class,
-                () -> productRepository.delete("eb558e9f-1c39-460e-8860-71af6af63bd6"));
+                () -> productRepository.deleteById("eb558e9f-1c39-460e-8860-71af6af63bd6"));
     }
 
     @Test
     void testDeleteProduct_IfProductNotFound(){
         assertThrows(ArrayIndexOutOfBoundsException.class,
-                () -> productRepository.delete("randomProductId"));
+                () -> productRepository.deleteById("randomProductId"));
     }
 }

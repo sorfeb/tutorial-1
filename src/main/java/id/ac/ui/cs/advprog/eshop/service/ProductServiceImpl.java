@@ -32,11 +32,10 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findById(productId);
     }
 
-    public Product editProduct(Product product){
-        return productRepository.editProduct(product);
+    public Product editProduct (Product product){ return productRepository.update(product);
     }
 
     public Product deleteProduct(String productId){
-        return productRepository.delete(productId);
+        return productRepository.deleteById(productId);
     }
 }
