@@ -88,3 +88,39 @@ My workflows have fulfilled several criterias of Continous Integration and Conti
     
 </details>
 
+## Module 3 - Maintainability & OO Principles
+<details>
+  <summary>
+    Answers
+  </summary>
+
+  ### 1. Explain what principles you apply to your project
+  - #### Single Responsibility Principle (SRP)
+  Pada CarController dan ProductController sekaligus juga di class model Product dan Car, setiap hal tersebut punya responsibilitynya masing-masing. Product bertanggung jawab untuk meng-handle product-related properties and behaviors, dan Car bertanggung jawab untuk meng-handle car-related properties and behaviors. Selain itu sebelumnya di CarController yang extends ProductController dan juga terletak di satu file ProductController, ini mengakibatkan akses endpoint yang tidak diinginkan, seperti misalnya apabila diakses endpoint localhost:8080/car/list dia malah mengakses CarListPage dimana ini aneh karena kita ingin menseparate responsibility antara CarController dan ProductController yang bertanggung jawab atas bagiannya masing-masing.
+  
+  - #### Open Closed Principle (OCP)
+  class `Product` diextend oleh class `Car` karena mempunyai atribut yang sama seperti `productId`, `productName`, dan `productQuantity`. Akan tetapi, class `Car` mempunyai atribut tambahan sendiri, yaitu `color`. 
+  
+  - #### Liskov Substitution Principle (LSP)
+  Sebeleum class `CarController` dan `ProductController` dipisah, class `CarController` dipakai menjadi subclass `ProductController`. Hal ini melanggar LSP karena proses-proses untuk memodifikasi Car lebih cocok diimplementasikan oleh class `CarController` saja, bukan turunan dari `ProductController`. Oleh karena itu, lebih baik kedua kelas tersebut dipisah. 
+  
+  - #### Interface Segregation Principle (ISP)
+  Saya membuat kelas interface baru bernama `TemplateRepository` yang berisi fungsi-fungsi dasar untuk membuat atau memodifikasi data-data `Product` (Superclass dari `Car`). Hal ini menjadi pedoman bari fungsi-fungsi yang diimplementasi pada kelas `CarRepository` dan `ProductRepository` sesuai dengan kebutuhan masing-masing.
+  
+  - #### Dependency Inversion Principle (DIP)
+  Kelas-kelas repository car dan product dependent kepada `CarService` atau `ProductService`, bukan kepada implementasi kelas service masing-masing.
+  
+  ### 2. Explain the advantages of applying SOLID principles to your project with examples.
+  - Dengan membuat template repository, saya lebih mudah membuat kelas repository bagi model baru karena terdapat pedoman apa saja kelas yang harus diimplementasi bagi model baru.
+  - Dengan memisahkan Controller menjadi CarController, ProductController, dan HomeController, kode menjadi lebih terorganisir karena tahu kelas mana yang harus diperbaiki (_easier debugging_)
+  - Dengan membuat `Car` subclass `Product`, saya tidak mengulang atribut-atribut yang sama dua kali, karena pada hakikatnya `Car` memiliki beberapa atribut yang sama dengan `Product`.
+  - Dengan mengubah dependensi para repository ke para interface, maka pemeliharaan kode lebih gampang karena sedikit pengubahan pada kode interface tersebut tidak akan berdampak fatal ke kode repository.
+  - 
+  ### 3. Explain the disadvantages of not applying SOLID principles to your project with examples.
+  - Kode yang tidak mematuhi SOLID cenderung memiliki struktur yang kompleks dan sulit dipahami.
+  - Kode yang tidak mematuhi SOLID cenderung kurang fleksibel dan sulit dimodifikasi. Ketika ada perubahan atau penambahan fitur, pengembang harus mengubah banyak bagian kode, yang meningkatkan risiko kesalahan dan waktu pengembangan yang lebih lama.
+  -  Tanpa SOLID, ada kecenderungan untuk adanya duplikasi kode di berbagai bagian sistem. Hal ini tidak hanya membuat kode sulit dipelihara, tetapi juga meningkatkan risiko bug dan kesalahan konsistensi.
+  -  Ketika tim pengembang bekerja pada proyek yang tidak mematuhi SOLID, akan sulit untuk berkolaborasi secara efektif. Perbedaan dalam gaya dan pendekatan pengembangan akan meningkatkan kompleksitas dan memperlambat progres proyek.
+
+</details>
+
