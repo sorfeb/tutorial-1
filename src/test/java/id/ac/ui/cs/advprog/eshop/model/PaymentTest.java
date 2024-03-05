@@ -73,14 +73,13 @@ class PaymentTest {
         });
     }
 
-    @Test //Happy: Test to create payment with invalid status
-    void testCreatePaymentInvalidStatus() {
+    @Test //Happy: Test to automatically set payment status to failed
+    void testCreatePaymentInvalidPaymentData() {
         Map<String, String> paymentData = new HashMap<>();
-        paymentData.put("voucherCode", "ESHOP1234ABC5678");
+        paymentData.put("voucherCode", "ESH");
 
-        assertThrows (IllegalArgumentException.class, () -> {
-            Payment payment = new Payment("12345678-012a-4c07-b546-54eb1396d79b",
-                    "VOUCHER", "PENDING", paymentData);
-        });
+        Payment payment = new Payment("12345678-012a-4c07-b546-54eb1396d79b",
+                "VOUCHER", "SUCCESS", paymentData);
+        assertEquals("FAILED", payment.getStatus());
     }
 }
