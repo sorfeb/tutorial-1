@@ -2,10 +2,10 @@ package id.ac.ui.cs.advprog.eshop.model;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import enums.PaymentStatus;
+import enums.PaymentMethod;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 @Builder
@@ -47,21 +47,20 @@ public class Payment {
 
     //Set Status according to paymentData
     public void setStatus() {
-        String[] paymentMethods = {"VOUCHER", "CASH_ON_DELIVERY"};
-
-        if (Arrays.stream(paymentMethods).noneMatch(item -> (item.equals(this.method)))) {
+        if (!PaymentStatus.contains(this.method)) {
             throw new IllegalArgumentException();
-        } else if (this.method.equals("VOUCHER")) {
+        } else if (this.method.equals(PaymentMethod.VOUCHER.getValue())) {
             if (isValidVoucherCode(paymentData.get("voucherCode"))) {
-                this.status = "SUCCESS";
+                this.status = PaymentStatus.SUCCESS.getValue();
             } else {
-                this.status = "FAILED";
+                this.status = PaymentStatus.FAILED.getValue();
             }
-        } else if (this.method.equals("CASH_ON_DELIVERY")) {
+
+        } else if (this.method.equals(PaymentMethod.CASH_ON_DELIVERY.getValue())) {
             if (isValidCashOnDelivery(paymentData.get("address"), paymentData.get("deliveryFee"))) {
-                this.status = "SUCCESS";
+                this.status = PaymentStatus.SUCCESS.getValue();
             } else {
-                this.status = "FAILED";
+                this.status = PaymentStatus.FAILED.getValue();
             }
         }
     }
