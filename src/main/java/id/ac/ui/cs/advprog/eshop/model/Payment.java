@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+@Builder
+@Getter
 public class Payment {
     String id;
     String method;
