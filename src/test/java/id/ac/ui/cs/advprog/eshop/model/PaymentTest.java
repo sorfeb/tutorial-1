@@ -43,9 +43,11 @@ class PaymentTest {
 
     @Test //Unhappy: Test to create payment with empty data
     void testCreatePaymentEmptyPaymentData(){
+        Map<String, String> paymentData = new HashMap<>();
+
         assertThrows(IllegalArgumentException.class, () -> {
             Payment payment = new Payment("12345678-012a-4c07-b546-54eb1396d79b",
-                    "VOUCHER", "SUCCESS");
+                    "VOUCHER", "SUCCESS", paymentData);
         });
     }
 
