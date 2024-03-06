@@ -6,6 +6,7 @@ import enums.PaymentStatus;
 import enums.PaymentMethod;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 @Builder
@@ -16,19 +17,22 @@ public class Payment {
     String status;
     Map<String, String> paymentData;
 
-    public Payment(String id, String method, String status, Map<String, String> paymentData) {
+    public Payment(String id, String method, Map<String, String> paymentData) {
         if (id == null || method == null || paymentData == null) {
             throw new IllegalArgumentException();
         }
         this.id = id;
         this.method = method;
-        this.status = status;
+        this.status = PaymentStatus.PENDING.getValue();
 
         if (paymentData.isEmpty()) {
             throw new IllegalArgumentException();
         }
         this.paymentData = paymentData;
+    }
 
+    public Payment(String id, String method, String status, Map<String, String> paymentData) {
+        this(id, method, paymentData);
         this.setStatus();
     }
 
