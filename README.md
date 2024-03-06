@@ -124,3 +124,51 @@ My workflows have fulfilled several criterias of Continous Integration and Conti
 
 </details>
 
+## Module 4 - Refactoring and TDD
+
+<details>
+  <summary>
+    Answers
+  </summary>
+
+  ### 1. Reflect based on Percival (2017) proposed self-reflective questions (in “Principles and Best Practice of Testing” submodule, chapter “Evaluating Your Testing Objectives”), whether this TDD flow is useful enough for you or not. If not, explain things that you need to do next time you make more tests.
+  
+  #### Correctness
+  1. Do I have **enough functional** tests to reassure myself that my application really **works, from the point of view of the user**?
+     - I felt I had enough functional tests that I felt that my application works.
+  2. *Am I testing all the edge cases* thoroughly?
+     - All edge cases have been tested on the tests except for `null` situations for `OrderRepository`.
+  3. Do I have tests that check whethter **all my components fit together** properly? Could some integrated tests do this, or are functional tests enough?
+     - Yes the functional tests is enough to check the integration between components because the code has already integrated with each other.
+     
+  #### Maintanability
+  1. Are my tests giving me the confidence to refactor my code, fearlessly and frequently?
+     - Yes, by writing the tests I know what to refactor, add, or remove from my code because I know the positive and negative cases for the code.
+  3. Are my tests helping me to drive out a good design? If I have a lot of integration tests but less unit tests, do I need to make more unit tests to get better feedback on my code design?
+     - Yes the tests are helping to drive out a good design because now I know what is right and wrong results of the algorithm. Yes, because you need to make sure tests cover as much aspect of the code as you can. 
+     
+     
+  #### Productive Workflow
+  1. Are my feedback cycles as fast as I would like them? When do I get warned about bugs, and is there any practical way to make that happen sooner?
+     - Yes, because the testing library tells me errors and bugs after running the tests. If I want it to happen sooner, I could just review my test code algorithms and implement it when writing new features.
+  2. Is there some way that I could write faster integration tests that would get me feedback quicker?
+     - Only focus on writing tests that are used often and integrated or prone to errors and bugs. 
+  3. Can I run a subset of the full test suite when I need to?
+     - Yes, you can select tests to run during situations when you have a feeling that the test will fail or prone to error or you know other tests are confident enough to pass.
+  4. Am I spending too much time waiting for tests to run, and thus less time ina productive flow state?
+     - Yes and no. You can implement code while the tests running, but if you have reached *coder's block* after not knowing what to do, then maybe you need to wait the tests to run to have a thorough explanation.
+       
+  ### 2. You have created unit tests in Tutorial. Now reflect whether your tests have successfully followed F.I.R.S.T. principle or not. If not, explain things that you need to do the next time you create more tests.
+  - FIRST
+    - My tests are already integrated with the CI/CD pipelene and separated into unit tests and functional tests, allowing faster test runs without interrupting workflow.
+  - ISOLATED/INDEPENDENT
+    - My tests are already independent thanks to setUp and tearDown codes avoiding interference to state of functions.
+  - REPEATABLE
+    - My tests are able to run repeatedly thanks to JUnit and fulfillment of the Isolated/Indepent aspect. 
+  - SELF-VALIDATING
+    - By using `org.junit.jupiter.api.Assertions.*;` library, my tests are already self-validating and contains human-readable assertions.
+  - THOROUGH/TIMELY
+    - My tests are designed with happe and unhappy paths, covering different scenarios, and also made before coding new features.
+  
+</details>
+
