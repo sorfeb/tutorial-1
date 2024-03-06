@@ -63,7 +63,7 @@ class PaymentRepositoryTest {
     }
 
     @Test //Happy: Test if payment is saved to the same repository, it will be updated
-    void testSaveUpdate {
+    void testSaveUpdate() {
         Payment payment = payments.get(1);
         paymentRepository.save(payment);
 
