@@ -49,6 +49,14 @@ public class Payment {
                 && !deliveryFee.isEmpty();
     }
 
+    public void setStatus(String status) {
+        if (PaymentStatus.contains(status)) {
+            this.status = status;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
     //Set Status according to paymentData
     public void setStatus() {
         if (!PaymentStatus.contains(this.method)) {
@@ -57,14 +65,14 @@ public class Payment {
             if (isValidVoucherCode(paymentData.get("voucherCode"))) {
                 this.status = PaymentStatus.SUCCESS.getValue();
             } else {
-                this.status = PaymentStatus.FAILED.getValue();
+                this.status = PaymentStatus.REJECTED.getValue();
             }
 
         } else if (this.method.equals(PaymentMethod.CASH_ON_DELIVERY.getValue())) {
             if (isValidCashOnDelivery(paymentData.get("address"), paymentData.get("deliveryFee"))) {
                 this.status = PaymentStatus.SUCCESS.getValue();
             } else {
-                this.status = PaymentStatus.FAILED.getValue();
+                this.status = PaymentStatus.REJECTED.getValue();
             }
         }
     }

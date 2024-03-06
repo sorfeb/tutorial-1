@@ -8,6 +8,7 @@ import enums.OrderStatus;
 import enums.PaymentStatus;
 import enums.PaymentMethod;
 
+import id.ac.ui.cs.advprog.eshop.repository.PaymentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,11 +24,11 @@ import java.util.*;
 @ExtendWith(MockitoExtension.class)
 public class PaymentServiceImplTest {
     @InjectMocks
-    OrderServiceImpl paymentService;
+    PaymentServiceImpl paymentService;
     @Mock
     OrderRepository orderRepository;
     @Mock
-    OrderRepository paymentRepository;
+    PaymentRepository paymentRepository;
     List<Order> orders;
     List<Payment> payments;
 
