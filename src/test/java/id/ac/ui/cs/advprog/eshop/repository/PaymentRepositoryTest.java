@@ -1,22 +1,22 @@
 package id.ac.ui.cs.advprog.eshop.repository;
 
-import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
 import id.ac.ui.cs.advprog.eshop.model.Product;
-import id.ac.ui.cs.advprog.eshop.repository.PaymentRepository;
-import enums.PaymentStatus;
 import enums.PaymentMethod;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PaymentRepositoryTest {
-    PaymentRepository paymentRepository;
 
+class PaymentRepositoryTest {
+
+    PaymentRepository paymentRepository;
     List<Payment> payments;
 
     @BeforeEach
@@ -113,23 +113,22 @@ class PaymentRepositoryTest {
         assertTrue(paymentIterator.hasNext());
 
         Payment savedPayment = paymentIterator.next();
-        assertEquals(payments.get(1).getId(), savedPayment.getId());
-        assertEquals(payments.get(1).getMethod(), savedPayment.getMethod());
-        assertEquals(payments.get(1).getStatus(), savedPayment.getStatus());
-        assertEquals(payments.get(1).getPaymentData(), savedPayment.getPaymentData());
+        assertEquals(payments.getFirst().getId(), savedPayment.getId());
+        assertEquals(payments.getFirst().getMethod(), savedPayment.getMethod());
+        assertEquals(payments.getFirst().getStatus(), savedPayment.getStatus());
+        assertEquals(payments.getFirst().getPaymentData(), savedPayment.getPaymentData());
 
         savedPayment = paymentIterator.next();
         assertTrue(paymentIterator.hasNext());
 
         savedPayment = paymentIterator.next();
-        assertTrue(paymentIterator.hasNext());
 
         assertFalse(paymentIterator.hasNext());
     }
 
     @Test
     void testFindAllIfEmpty() {
-        Iterator<Product> paymentIterator = paymentRepository.findAll();
+        Iterator<Payment> paymentIterator = paymentRepository.findAll();
         assertFalse(paymentIterator.hasNext());
     }
 }
